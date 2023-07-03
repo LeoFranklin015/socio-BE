@@ -3,6 +3,7 @@ import {
   createPost,
   deletePost,
   getPost,
+  getTimelinePost,
   likePost,
   updatePost,
 } from "../Controllers/PostController.js";
@@ -14,4 +15,5 @@ router.get("/:id", getPost);
 router.patch("/:id", updatePost);
 router.post("/delete/:id", deletePost);
 router.patch("/like/:id", likePost);
+router.get("/getAllPost/:id", getTimelinePost);
 export default router;
