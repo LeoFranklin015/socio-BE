@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import AuthRoute from "./Routes/auth.js";
 import UserRoutes from "./Routes/user.js";
 import PostRoutes from "./Routes/posts.js";
+import UploadRoute from "./Routes/upload.js";
 
 const app = express();
 app.use(express.json({ limit: "30mb", extebded: true }));
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 app.use("/auth", AuthRoute);
 app.use("/user", UserRoutes);
 app.use("/post", PostRoutes);
+app.use("/upload", UploadRoute);
 
 const PORT = process.env.PORT || 4000;
 
