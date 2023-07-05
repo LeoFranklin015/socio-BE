@@ -8,6 +8,9 @@ import PostRoutes from "./Routes/posts.js";
 import UploadRoute from "./Routes/upload.js";
 
 const app = express();
+
+app.use(express.static("public"));
+app.use("/images", express.static("images"));
 app.use(express.json({ limit: "30mb", extebded: true }));
 app.use(express.urlencoded({ limitt: "30mb", extended: true }));
 app.use(cors());
