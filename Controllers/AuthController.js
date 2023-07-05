@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 import UserModel from "../Model/userModel.js";
 import bcrypt from "bcrypt";
-
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 //REGISTER
 
 export const registerUser = async (req, res) => {
@@ -16,8 +18,23 @@ export const registerUser = async (req, res) => {
     lastName,
   });
   try {
-    await newUser.save();
-    res.status(200).json(newUser);
+    const oldUser = await UserModel.findOne({ username: username });
+    if (oldUser) {
+      return res
+        .status(400)
+        .json("Username already exist try using another username");
+    }
+    const user = await newUser.save();
+
+    const token = jwt.sign(
+      {
+        username: user.username,
+        id: user._id,
+      },
+      process.env.JWT_KEY,
+      { expiresIn: "1h" }
+    );
+    res.status(200).json({ user, token });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
