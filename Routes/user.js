@@ -3,15 +3,17 @@ import {
   deleteUser,
   followUser,
   getUser,
-  unFollowUser,
+  unfollowUser,
   updateUser,
+  getAllUsers,
 } from "../Controllers/UserController.js";
 
 const router = express.Router();
 
 router.get("/:id", getUser);
+router.get("/", getAllUsers);
 router.patch("/update/:id", updateUser);
 router.post("/delete/:id", deleteUser);
 router.patch("/:id/follow", followUser);
-router.patch("/:id/unfollow", unFollowUser);
+router.patch("/:id/unfollow", unfollowUser);
 export default router;
