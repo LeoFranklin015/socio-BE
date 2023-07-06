@@ -12,6 +12,8 @@ const UserSchema = mongoose.Schema(
     about: String,
     followers: [],
     following: [],
+    worksAt: String,
+    livesIn: String,
   },
   { timestamps: true }
 );
