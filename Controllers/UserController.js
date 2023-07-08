@@ -206,3 +206,23 @@ export const unfollowUser = async (req, res) => {
     }
   }
 };
+
+export const searchUser = async (req, res) => {
+  const { q } = req.query;
+  try {
+    let users = await UserModel.find();
+    users = users.map((user) => {
+      const { password, ...otherDetails } = user._doc;
+      return otherDetails;
+    });
+    const keys = ["firstName", "lastName", "username"];
+    const search = (users1) => {
+      return users1.filter((user) =>
+        keys.some((key) => user[key] && user[key].includes(q))
+      );
+    };
+    res.status(200).json(search(users));
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

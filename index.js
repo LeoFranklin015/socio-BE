@@ -6,6 +6,7 @@ import AuthRoute from "./Routes/auth.js";
 import UserRoutes from "./Routes/user.js";
 import PostRoutes from "./Routes/posts.js";
 import UploadRoute from "./Routes/upload.js";
+import SearchRoutes from "./Routes/search.js";
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use("/auth", AuthRoute);
 app.use("/user", UserRoutes);
 app.use("/post", PostRoutes);
 app.use("/upload", UploadRoute);
+app.use("/search", SearchRoutes);
 
 const PORT = process.env.PORT || 4000;
 
